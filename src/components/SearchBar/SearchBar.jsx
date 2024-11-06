@@ -10,8 +10,9 @@ const SearchBar = ({ setQuery }) => {
         if (elem.topic.value === "") return toast.error("Search cannot be empty");
         await setQuery((prev) => ({
             ...prev,
-            topic: elem.topic.value,
+            topic: elem.topic.value.trim().toLowerCase(),
             per_page: elem.per_page.value || 10,
+            pagination: false
         }));
         e.target.reset();
     };
