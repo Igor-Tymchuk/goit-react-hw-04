@@ -8,7 +8,7 @@ import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ImageModal from "./components/ImageModal/ImageModal";
 
 
-function App() {
+const App = () => {
   const queryObj = {
     topic: "",
     per_page: 10,
@@ -46,9 +46,10 @@ function App() {
 
   }, [query]);
   const [modal, setModal] = useState(false);
-
-  const handleModal = (url, alt, description, likes) => {
-
+  const [savedImg, setSavedImg] = useState({});
+  const handleModal = (imageData) => {
+    setSavedImg(imageData);
+    setModal(true);
   }
 
   return (
@@ -58,7 +59,7 @@ function App() {
       {error.isActive ? <ErrorMessage code={error.errCode} message={error.errMsg} /> : ""}
       {loader ? <Loader /> : ""}
       <LoadMoreBtn setQuery={setQuery} totalPage={totalPage} page={query.page} />
-      <ImageModal handleModal={handleModal} />
+      <ImageModal isOpen={modal} onClose={() => { setModal(false) }} imageData={savedImg}></ImageModal>
     </>
   )
 }

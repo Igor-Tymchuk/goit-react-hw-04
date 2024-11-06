@@ -1,7 +1,8 @@
-const ImageCard = ({ image: { urls, alt_description, description, likes }, handleModal }) => {
+import s from "./ImageCard.module.css"
+const ImageCard = ({ image, handleModal }) => {
 
     return <div>
-        <img src={urls.small} alt={alt_description} onClick={() => handleModal(urls.regular, alt_description, description, likes)} />
+        <img className={s.img} src={image.urls.small} alt={image.alt_description} onClick={() => handleModal(image)} />
     </div>
 }
 export default ImageCard;

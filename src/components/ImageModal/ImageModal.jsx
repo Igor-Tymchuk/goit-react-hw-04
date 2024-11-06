@@ -1,73 +1,25 @@
-// import s from "./ImageModal.module.css"
-
-// const ImageModal = ({ url, alt, description, likes, handleModal }) => {
-
-//     return <div onClick={handleModal} className={s.overlay}>
-//         <div className={s.modal}>
-//             <div><p>{description}</p>
-//                 <img className={s.imgModal} src={url} alt={alt} />
-//                 <p>{likes}</p></div>
-//         </div>
-//     </div>
-// }
-// export default ImageModal;
-
-import React from 'react';
+import s from "./ImageModal.module.css"
 import Modal from 'react-modal';
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
-};
+// { url, alt, description, likes, handleModal }
+const ImageModal = ({ isOpen, onClose, imageData: { urls, alt_description, description, likes } }) => {
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-// Modal.setAppElement('#gallery');
-
-export default function ImageModal() {
-    let subtitle;
-    const [modalIsOpen, setIsOpen] = React.useState(false);
-
-    function openModal() {
-        setIsOpen(true);
-    }
-
-    function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        subtitle.style.color = '#f00';
-    }
-
-    function closeModal() {
-        setIsOpen(false);
-    }
 
     return (
-        <div>
-            <button onClick={openModal}>Open Modal</button>
-            <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-            >
-                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-                <button onClick={closeModal}>close</button>
-                <div>I am a modal</div>
-                <form>
-                    <input />
-                    <button>tab navigation</button>
-                    <button>stays</button>
-                    <button>inside</button>
-                    <button>the modal</button>
-                </form>
-            </Modal>
-        </div>
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={onClose}
+            overlayClassName={s.modalOverlay}
+            className={s.modalContent}
+            ariaHideApp={false}
+            closeTimeoutMS={300}
+        >
+            <button onClick={onClose}>close</button>
+            <p>{likes}</p>
+            <img src={urls?.regular} alt={alt_description} />
+            <p>{description}</p>
+        </Modal>
     );
 }
 
+export default ImageModal;
