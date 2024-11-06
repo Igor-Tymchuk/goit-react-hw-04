@@ -11,7 +11,7 @@ const params = {
 
 const fetchImg = async (topic, per_page = 10, page = 1) => {
     const response = await axios(`search/photos?page=${page}&per_page=${per_page}&query=${topic}`, params);
-    console.log(response.data);
+    console.log(response.data.results);
     return response.data;
 };
 
