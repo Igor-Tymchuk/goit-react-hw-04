@@ -12,7 +12,7 @@ const ImageModal = ({ isOpen, onClose, imageData: { urls, alt_description, descr
             overlayClassName={s.overlay}
             className={s.content}
             ariaHideApp={false}
-            closeTimeoutMS={300}
+            closeTimeoutMS={200}
             contentLabel={description}
             bodyOpenClassName={s.reactModal}
         >
