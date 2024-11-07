@@ -60,7 +60,7 @@ const App = () => {
       {error.isActive ? <ErrorMessage code={error.errCode} message={error.errMsg} /> : ""}
       {loader ? <Loader /> : ""}
       {query.page < totalPage ? <LoadMoreBtn setQuery={setQuery} totalPage={totalPage} page={query.page} /> : ""}
-      <ImageModal isOpen={modal} onClose={() => { setModal(false) }} imageData={savedImg}></ImageModal>
+      <ImageModal isOpen={modal} onClose={() => { setModal(false) }} imageData={savedImg} />
     </>
   )
 }

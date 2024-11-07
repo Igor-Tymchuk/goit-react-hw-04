@@ -2,8 +2,6 @@ import s from "./ImageModal.module.css"
 import Modal from 'react-modal';
 import { FaRegHeart, FaWindowClose } from "react-icons/fa";
 
-
-// { url, alt, description, likes, handleModal }
 const ImageModal = ({ isOpen, onClose, imageData: { urls, alt_description, description, likes } }) => {
 
 
