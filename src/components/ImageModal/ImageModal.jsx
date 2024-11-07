@@ -1,5 +1,7 @@
 import s from "./ImageModal.module.css"
 import Modal from 'react-modal';
+import { FaRegHeart, FaWindowClose } from "react-icons/fa";
+
 
 // { url, alt, description, likes, handleModal }
 const ImageModal = ({ isOpen, onClose, imageData: { urls, alt_description, description, likes } }) => {
@@ -9,15 +11,17 @@ const ImageModal = ({ isOpen, onClose, imageData: { urls, alt_description, descr
         <Modal
             isOpen={isOpen}
             onRequestClose={onClose}
-            overlayClassName={s.modalOverlay}
-            className={s.modalContent}
+            overlayClassName={s.overlay}
+            className={s.content}
             ariaHideApp={false}
             closeTimeoutMS={300}
+            contentLabel={description}
+            bodyOpenClassName={s.reactModal}
         >
-            <button onClick={onClose}>close</button>
-            <p>{likes}</p>
-            <img src={urls?.regular} alt={alt_description} />
-            <p>{description}</p>
+            <button onClick={onClose} className={s.btn}><FaWindowClose className={s.icon} /></button>
+            {likes ? <p className={s.likes}><FaRegHeart className={s.iconLikes} />{likes}</p> : ""}
+            <img src={urls?.regular} alt={alt_description} className={s.img} />
+            {description ? <p className={s.description}>{description}</p> : ""}
         </Modal>
     );
 }

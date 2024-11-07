@@ -3,9 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 25px 0;
 }
 .form {
-  margin-top: 25px;
   padding: 0 10px;
   display: flex;
   min-height: 44px;
@@ -20,24 +20,26 @@
 }
 .inputNum,
 .inputText {
+  font-family: inherit;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 0 5px;
-  min-width: 60px;
+  min-width: 70px;
   outline: transparent;
-  border: transparent;
+  border: 2px solid transparent;
   font-size: 14px;
   transition: border-bottom 200ms ease-in-out;
   &::placeholder {
     transition: color 200ms ease-in-out;
   }
   &:focus-within {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.308);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.308);
+    caret-color: transparent;
     &::placeholder {
-      color: transparent;
+      color: rgba(0, 0, 0, 0.137);
     }
   }
 }

@@ -1,25 +1,18 @@
 .gallery {
+  padding: 0 30px;
+  margin: 0 auto;
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
-  max-width: 1200px;
   gap: 24px;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  margin-bottom: 25px;
 }
 .card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 360px;
-  height: 200px;
+  min-width: 360px;
+  min-height: 200px;
   border: 1px solid #808080;
   overflow: hidden;
   transition: border 300ms ease;
-}
-
-.card:hover .informations {
-  background-color: #ffffff;
 }
 .card:hover {
   border: 1px solid black;

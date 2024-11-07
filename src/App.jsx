@@ -29,11 +29,12 @@ const App = () => {
         if (!query.pagination) setResults(["FIRST-LOAD"]);
         setError({ isActive: false, errCode: "", errMsg: "" })
         setLoader(true);
+        setTotalPages(0);
         const data = await fetchImg(query.topic, query.per_page, query.page);
+        setTotalPages(data.total_pages);
         if (query.pagination) {
           return setResults((prev) => ([...prev, ...data.results]));
         }
-        setTotalPages(data.total_pages);
         setResults(data.results);
       }
       catch (err) {
@@ -58,7 +59,7 @@ const App = () => {
       {results[0] === "FIRST-LOAD" ? "" : results.length > 0 ? <ImageGallery data={results} handleModal={handleModal} /> : <h2>Images not found...</h2>}
       {error.isActive ? <ErrorMessage code={error.errCode} message={error.errMsg} /> : ""}
       {loader ? <Loader /> : ""}
-      <LoadMoreBtn setQuery={setQuery} totalPage={totalPage} page={query.page} />
+      {query.page < totalPage ? <LoadMoreBtn setQuery={setQuery} totalPage={totalPage} page={query.page} /> : ""}
       <ImageModal isOpen={modal} onClose={() => { setModal(false) }} imageData={savedImg}></ImageModal>
     </>
   )

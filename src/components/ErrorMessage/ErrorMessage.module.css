@@ -1,4 +1,6 @@
 .error {
+  margin: 0 auto;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
