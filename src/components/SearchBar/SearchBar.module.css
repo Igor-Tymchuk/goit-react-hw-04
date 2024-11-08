@@ -26,8 +26,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0 5px;
-  min-width: 70px;
+  min-width: 55px;
   outline: transparent;
   border: 2px solid transparent;
   font-size: 14px;
@@ -42,6 +41,9 @@
       color: rgba(0, 0, 0, 0.137);
     }
   }
+}
+.inputText {
+  min-width: 200px;
 }
 
 .inputNum::-webkit-outer-spin-button,

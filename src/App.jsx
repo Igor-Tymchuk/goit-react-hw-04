@@ -72,10 +72,10 @@ const App = () => {
     <>
       <SearchBar handleQuery={handleQuery} query={query} id="gallery" />
       {firstLoad ? "" : results.length > 0 ? <ImageGallery data={results} handleModal={handleModal} /> : <h2>Images not found...</h2>}
-      {error.isActive ? <ErrorMessage code={error.errCode} message={error.errMsg} /> : ""}
-      {loader ? <Loader /> : ""}
-      {page < totalPage ? <LoadMoreBtn handleLoadMore={handleLoadMore} /> : ""}
-      <ImageModal isOpen={isModalOpen} onClose={() => { setIsModalOpen(false) }} selectedImage={selectedImage} />
+      {error.isActive && <ErrorMessage code={error.errCode} message={error.errMsg} />}
+      {loader && <Loader />}
+      {page < totalPage && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
+      <ImageModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} selectedImage={selectedImage} />
     </>
   )
 }
