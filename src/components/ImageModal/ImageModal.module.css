@@ -9,16 +9,10 @@
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.7) !important;
   z-index: 999;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 .reactModal {
   overflow: hidden;
-}
-.overlay--after-open {
-  opacity: 1;
-}
-.overlay--before-close {
-  opacity: 0;
 }
 .content {
   min-width: 360px;
@@ -30,15 +24,10 @@
   padding: 10px;
   background-color: #fff;
   border-radius: 10px;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   outline: transparent;
 }
-.content--after-open {
-  transform: translateY(0);
-}
-.content--before-close {
-  transform: translateY(50px);
-}
+
 .img {
   max-width: 90vw;
   max-height: 90vh;
