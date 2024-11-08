@@ -15,14 +15,14 @@
   overflow: hidden;
 }
 .content {
-  min-width: 360px;
+  min-width: 200px;
   min-height: 200px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 10px;
-  background-color: #fff;
+  background-color: #dbdbdb;
   border-radius: 10px;
   transition: transform 0.2s ease-in-out;
   outline: transparent;
