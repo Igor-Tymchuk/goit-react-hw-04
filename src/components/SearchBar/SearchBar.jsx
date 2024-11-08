@@ -3,23 +3,19 @@ import toast, { Toaster } from 'react-hot-toast';
 import s from "./SearchBar.module.css";
 import { MdSearch } from "react-icons/md";
 
-const SearchBar = ({ setQuery }) => {
+const SearchBar = ({ handleQuery }) => {
 
-    const handleQuery = async (e) => {
+    const createQuery = (e) => {
         e.preventDefault();
-        const elem = e.target.elements;
-        if (elem.topic.value === "") return toast.error("Search cannot be empty");
-        await setQuery((prev) => ({
-            ...prev,
-            topic: elem.topic.value.trim().toLowerCase(),
-            per_page: elem.per_page.value || 10,
-            pagination: false
-        }));
+        const newQuery = e.target.elements.query.value.trim().toLowerCase();
+        if (newQuery === "") return toast.error("Search cannot be empty");
+        const perPage = e.target.elements.per_page.value;
         e.target.reset();
+        return handleQuery(newQuery, perPage);
     };
 
     return <header className={s.header}>
-        <form onSubmit={handleQuery} className={s.form}>
+        <form onSubmit={createQuery} className={s.form}>
             <input type="number" name="per_page" placeholder="PerPage" min="1" max="30" step="1" className={s.inputNum} />
             <input
                 className={s.inputText}
@@ -27,7 +23,7 @@ const SearchBar = ({ setQuery }) => {
                 autoComplete="off"
                 autoFocus
                 placeholder="Search images and photos"
-                name="topic"
+                name="query"
             />
             <button type="submit"><MdSearch className={s.btn} /></button>
         </form>
