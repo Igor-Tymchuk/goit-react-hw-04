@@ -97,14 +97,14 @@ const App = () => {
         onClose={toggleIsOpen}
         selectedImage={selectedImage}
       />
-      {firstLoad & !page && (
+      {/* {firstLoad & !page && (
         <div className="footer">
           <p>
             Created by <span>Tymchuk</span>
           </p>
           <p>2024 React</p>
         </div>
-      )}
+      )} */}
     </>
   );
 };
