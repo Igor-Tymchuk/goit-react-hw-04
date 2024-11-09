@@ -7,16 +7,19 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ImageModal from "./components/ImageModal/ImageModal";
 
-
 const App = () => {
   const [firstLoad, setFirstLoad] = useState(true);
   const [query, setQuery] = useState("");
   const [perPage, setPerPage] = useState(10);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [pagination, setPagination] = useState(false);
   const [totalPage, setTotalPages] = useState(0);
   const [loader, setLoader] = useState(false);
-  const [error, setError] = useState({ isActive: false, errCode: "", errMsg: "" });
+  const [error, setError] = useState({
+    isActive: false,
+    errCode: "",
+    errMsg: "",
+  });
   const [results, setResults] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState({});
@@ -34,34 +37,40 @@ const App = () => {
     setPage(page + 1);
     setPagination(true);
     return;
-  }
+  };
 
   const handleModal = (imageData) => {
     setSelectedImage(imageData);
-    setIsModalOpen(true);
+    toggleIsOpen();
     return;
-  }
+  };
+
+  const toggleIsOpen = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   useEffect(() => {
     if (!query) return;
     (async () => {
       try {
         setLoader(true);
-        setError({ isActive: false, errCode: "", errMsg: "" })
+        setError({ isActive: false, errCode: "", errMsg: "" });
         setTotalPages(0);
         const data = await fetchImg(query, perPage, page);
         if (pagination) {
-          setResults((prev) => ([...prev, ...data.results]));
+          setResults((prev) => [...prev, ...data.results]);
           setTotalPages(data.total_pages);
           return;
-        };
+        }
         setTotalPages(data.total_pages);
         setResults(data.results);
-      }
-      catch (err) {
-        setError({ isActive: true, errCode: err.status, errMsg: err?.response.data.errors.join(", ") })
-      }
-      finally {
+      } catch (err) {
+        setError({
+          isActive: true,
+          errCode: err.status,
+          errMsg: err?.response.data.errors.join(", "),
+        });
+      } finally {
         setLoader(false);
         setFirstLoad(false);
       }
@@ -71,13 +80,33 @@ const App = () => {
   return (
     <>
       <SearchBar handleQuery={handleQuery} query={query} id="gallery" />
-      {firstLoad ? "" : results.length > 0 ? <ImageGallery data={results} handleModal={handleModal} /> : <h2>Images not found...</h2>}
-      {error.isActive && <ErrorMessage code={error.errCode} message={error.errMsg} />}
+      {firstLoad ? (
+        ""
+      ) : results.length > 0 ? (
+        <ImageGallery data={results} handleModal={handleModal} />
+      ) : (
+        <h2>Images not found...</h2>
+      )}
+      {error.isActive && (
+        <ErrorMessage code={error.errCode} message={error.errMsg} />
+      )}
       {loader && <Loader />}
       {page < totalPage && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
-      <ImageModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} selectedImage={selectedImage} />
+      <ImageModal
+        isOpen={isModalOpen}
+        onClose={toggleIsOpen}
+        selectedImage={selectedImage}
+      />
+      {firstLoad & !page && (
+        <div className="footer">
+          <p>
+            Created by <span>Tymchuk</span>
+          </p>
+          <p>2024 React</p>
+        </div>
+      )}
     </>
-  )
-}
+  );
+};
 
 export default App;

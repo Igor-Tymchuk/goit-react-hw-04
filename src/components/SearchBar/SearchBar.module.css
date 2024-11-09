@@ -18,6 +18,7 @@
     box-shadow: 0 2px 8px 1px rgba(64, 60, 67, 0.24);
   }
 }
+
 .inputNum,
 .inputText {
   font-family: inherit;
@@ -44,6 +45,7 @@
 }
 .inputText {
   min-width: 200px;
+  border-left: 1px solid rgba(0, 0, 0, 0.137);
 }
 
 .inputNum::-webkit-outer-spin-button,
