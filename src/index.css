@@ -76,7 +76,7 @@ img {
 }
 .footer {
   position: absolute;
-  bottom: 2%;
+  bottom: 20px;
   right: 50%;
   transform: translateX(50%);
   display: flex;
